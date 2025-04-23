@@ -1,14 +1,11 @@
 Loop calling and centering with CHIRON+fracshift
 
-###
 
-Overview
+##Overview
 
 This repo contains the code for CHIRON, a CNN that was built to classify loops in high-depth RCMC, and RCMC fracshift, which centers loops using sub-pixel localization methods. 
 
-####
-
-Installation and usage:
+##Installation and usage:
 
 The required packages for CHIRON and fracshift can be installed from the attached environment.yml. CHIRON runs on tensorflow and can be CUDA-configured for GPU usage. However, the model can be run on CPUs especially if you are imputing smaller (<3Mb) regions.
 
@@ -16,21 +13,19 @@ The complete usage for CHIRON + fracshift is to impute loops on your RCMC, merge
 
 Example usage of CHIRON -> merge -> fracshift:
 
-# call loops
+### call loops
 python /chiron/chiron/imputation.py CHIRON_v0 \
     GM12878 GM12878_merged_realigned.50.mcool \
     region_list.txt -r region4,region5 -b 64 \
     -o test_output
 
-# merge loops 
+### merge loops 
 python /chiron/chiron/merge_loops_gaussian.py chiron_out/CHIRON_v0/GM12878_region4,region5_loops_raw.txt region_list.txt
 
-# fracshift (see also fracshift_exec_demo.py for more detail)
+### fracshift (see also fracshift_exec_demo.py for more detail)
 python /chiron/fracshift/exec_centering.py region_list.txt chiron_out/input_calls.txt chiron_out/corrected_calls.txt
 
-####
-
-Loop calling with CHIRON:
+## Loop calling with CHIRON:
 
 Find below detailed instructions on training and running the model (note that most users can jump right to imputation and loop merging):
 
@@ -69,9 +64,7 @@ Required inputs:
 - 'region_list': a 2-column file with names for the regions and the UCSC genome coordinates for each
 - 'loop_path': path to the loopcalls which should be tab-delimited point calls, as in the output of CHIRON.
 
-###
-
-Usage:
+## More Usage:
 
 Example pre-training (trains a 3-layer CNN):
 python /chiron/chiron/model_pretrain.py 3 "MODEL_SAVE_NAME" "PRETRAIN_DATA_DIR" -l 0.001 -e 100 -b 64
