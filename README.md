@@ -6,15 +6,6 @@ Overview
 
 This repo contains the code for CHIRON, a CNN that was built to classify loops in high-depth RCMC, and RCMC fracshift, which centers loops using sub-pixel localization methods. 
 
-# call loops 
-python /chiron/chiron/imputation.py CHIRON_v0 \
-    GM12878 GM12878_merged_realigned.50.mcool \
-    regions_all.bed -r region4,region5 -b 64
-
-# merge loops 
-
-# run fracshift 
-
 ####
 
 Installation and usage:
