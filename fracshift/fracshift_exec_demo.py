@@ -23,7 +23,7 @@ outfile = '/mnt/md0/varshini/RCMC_LoopCaller/loopcalls/fracshift_demo/demo.tsv'
 logfile = '/mnt/md0/varshini/RCMC_LoopCaller/fracshift_demo/demo.log'
 
 # test run with required arguments
-main([sample, region_list, loop_path, cooler_path, outfile])
+main([region_list, loop_path, cooler_path, outfile])
 
 # test run with optional arguments
-main([sample, region_list, loop_path, cooler_path, outfile, '-r', regions, '-l', logfile, '-v'])
+main([region_list, loop_path, cooler_path, outfile, '-r', regions, '-l', logfile, '-v'])

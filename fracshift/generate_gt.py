@@ -1,3 +1,6 @@
+"""
+written by jacob kaestel hansen
+"""
 import numpy as np
 
 
@@ -15,30 +18,6 @@ def generate_gaussian_blob(size, center, sigma=2):
     z0, y0, x0 = center
     blob = np.exp(-((x - x0)**2 + (y - y0)**2 + (z - z0)**2) / (2 * sigma**2))
     return blob
-# def generate_ground_truth_set(num_blobs, size, sigma=2):
-#     """
-#     Generate a set of Gaussian-like blobs with known fractional pixel centers.
-#     Parameters:
-#     - num_blobs (int): Number of blobs to generate.
-#     - size (tuple): Size of the 3D image volume.
-#     - sigma (float): Standard deviation of the Gaussian blobs.
-#     Returns:
-#     - image (ndarray): 3D image volume with Gaussian blobs.
-#     - ground_truth_centers (list of tuples): List of ground truth fractional pixel centers.
-#     """
-#     image = np.random.normal(0,0.05,size=size)
-#     ground_truth_centers = []
-#     for i in range(num_blobs):
-#         # Generate a random fractional pixel center within the volume bounds
-#         center = (np.random.uniform(5, size[0] - 5),
-#                   np.random.uniform(5, size[1] - 5),
-#                   np.random.uniform(5, size[2] - 5))
-#         print('center', center)
-#         ground_truth_centers.append(center)
-#         # Add the Gaussian blob to the image
-#         blob = generate_gaussian_blob(size, center, sigma)
-#         image += blob
-#     return image, ground_truth_centers
 
 def initial_guesses(ground_truth_centers):
     """

@@ -1,3 +1,6 @@
+"""
+Author/point of contact: Varshini Ramanathan (varsh@mit.edu)
+"""
 import copy
 
 import cv2

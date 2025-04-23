@@ -1,3 +1,7 @@
+"""
+Author: Fan Feng
+Edited/point of contact: Varshini Ramanathan (varsh@mit.edu)
+"""
 # if you have a small set of loops, do the following:
 # 1. generate training data
 # 2. generate negative training data

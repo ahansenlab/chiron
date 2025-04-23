@@ -1,12 +1,12 @@
-# functions relating to setup and formatting
+# functions relating to setup and formatting for rcmc fracshift
+# written by varshini ramanathan (varsh@mit.edu)
+
 import utils
 import numpy as np
 import pandas as pd
 import cooler
 import matplotlib.pyplot as plt
 from cooltools import numutils
-# get k-by-k
-
 
 # format loopcalls
 def format_loopcalls(loops, capture_string, cutoffs, col_name='anno_res'):
@@ -37,19 +37,6 @@ def get_matr(clr, capture_string):
     clr_mat[np.isnan(clr_mat)] = 0
     clr_mat_balanced = numutils.observed_over_expected(clr_mat)[0]
     return clr_mat_balanced
-
-# def get_cooler_mats(clr_path, capture_string, res_list):
-#     matr_all = {}
-#     for res in res_list:
-#         clr_path_curr = f"{clr_path}::resolutions/{int(res)}"
-#         clr = cooler.Cooler(clr_path_curr)
-#         matr_ub = clr.matrix(balance=True).fetch(capture_string)
-#         matr_ub[np.isnan(matr_ub)] = 0
-#         matr = numutils.observed_over_expected(matr_ub)[0]
-#         #utils.plot_simple(matr)
-#         matr_all[int(res)] = matr
-#
-#     return matr_all
 
 def get_cooler_mats(clr_path, capture_string, res_list):
     matr_all = {}

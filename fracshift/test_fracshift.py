@@ -1,6 +1,11 @@
+'''
+Purpose: simulate some gaussian blobs and evaluate fracshift on them to assess how accurate the centering is for
+different parameters.
+'''
+
 import generate_gt as gt
 import matplotlib.pyplot as plt
-import centering_archival
+import centering
 import numpy as np
 
 # Example usage: Generate 10 Gaussian-like blobs
@@ -42,8 +47,8 @@ for ind, i in enumerate(initial_guesses_centers):
             plotting=True
         for j in iters:
 
-            cctr, shift, dist, fshifts = centering.centering_fracshift_track_distances_2(im_sub, win=WINFRAC, plotting=False,
-                                                                              iterations=20, mask_radius=j)
+            cctr, shift, dist, fshifts = centering.centering_fracshift_track_distances_masked(im_sub, win=WINFRAC,
+                                                                    plotting=False, iterations=20, mask_radius=j)
             new_ctr = (xyc[0]+shift[0], xyc[1]+shift[1])
             print(f"Before Fracshift: {xyc}, After Fracshift: {new_ctr}, Shift = {shift}")
             # plt.figure()

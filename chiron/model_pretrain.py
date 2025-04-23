@@ -1,3 +1,7 @@
+"""
+Author: Fan Feng
+Edited/point of contact: Varshini Ramanathan (varsh@mit.edu)
+"""
 import os
 import json
 import numpy as np

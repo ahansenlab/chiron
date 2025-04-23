@@ -1,3 +1,6 @@
+# general loop utils 
+# written by varshini ramanathan (varsh@mit.edu)
+
 import re
 import numpy as np
 from numpy import linalg

@@ -135,9 +135,7 @@ if __name__ == '__main__':
     base_dir = '/mnt/md0/varshini/RCMC_LoopCaller/'
 
     celltypes = ['HCT116', 'H1', 'K562', 'GM12878']
-    #celltypes = ['GM12878']
     pred_dir = base_dir + ('loopcalls/v2_testing/pre_hp_4_ftr_2024-11-13/merged-strict/')
-    pk_dir = base_dir + ('loopcalls/peakachu/')
     mus_dir = base_dir + ('loopcalls/mustache/')
     call_dir = base_dir + 'loopcalls/Annotations_092324/'
 
@@ -150,12 +148,10 @@ if __name__ == '__main__':
         'region5': 'chr4:61369000-64435000'
     }
 
-    # the minimum reported probability peakachu was 0.70
     # the mustache predictions are 0 below fdr 10e-5 so i started there
-    thresholds_pk = np.logspace(np.log10(0.70), 0, 50)
     thresholds_mus = np.logspace(-5, 0, 50)
 
-    # the idli loop probs are much more representative at high probs i.e. the # of predictions changes a lot at the tail
+    # the chiron loop probs are much more representative at high probs i.e. the # of predictions changes a lot at the tail
     # so i used a reverse log spacing to define the thresholds. the opposite is true for mustache hence the log spacing
     thresholds = 1000 - np.geomspace(1, 1000, 50)
     thresholds = preprocessing.minmax_scale(thresholds, feature_range=(0.7, 1), axis=0, copy=True)
@@ -165,7 +161,6 @@ if __name__ == '__main__':
     cols_og.extend(thr_cols)
 
     pred_all = pd.DataFrame(columns=np.round(thresholds, 4), index=['TP', 'FP', 'FN'])
-    pred_all_pk = pd.DataFrame(columns=np.round(thresholds_pk, 4), index=['TP', 'FP', 'FN'])
     pred_all_mus = pd.DataFrame(columns=np.round(thresholds_mus, 4), index=['TP', 'FP', 'FN'])
 
     for ct in celltypes:
@@ -188,17 +183,6 @@ if __name__ == '__main__':
             pred_df['chr1'] = ch
             pred_filtered = clean_df(pred_df, bases_exclude, ch_coord[reg])
 
-           # load the peakachu loop calls
-           #  pk_df_og = pd.read_csv(f'{pk_dir}/{ct}_{reg}_peakachu_0.7.bedpe',
-           #                           sep='\s+', names=['chr1', 'start1', 'end1', 'chr2', 'start2', 'end2', 'prob', 'fdr'])
-           #  pk_df = pd.DataFrame()
-           #  pk_df['chr1'] = pk_df_og.iloc[:, 0]
-           #  pk_df['start1'] = np.mean(pk_df_og.loc[:, 'start1':'end1'].to_numpy(), axis=1)
-           #  pk_df['end1'] = np.mean(pk_df_og.loc[:, 'start2':'end2'].to_numpy(), axis=1)
-           #  pk_df['prob'] = pk_df_og['prob']
-           #  pk_filtered = clean_df(pk_df, bases_exclude, ch_coord[reg])
-
-            # mustache_df = pd.read_csv(os.path.join(mus_dir, f'{ct}_2kb.tsv'), sep='\t')
             mustache_df = pd.read_csv(os.path.join(mus_dir, f'{ct}_1kb_{ch}_s01.6_st0.88.tsv'), sep='\t')
             binsize = mustache_df['BIN1_END'] - mustache_df['BIN1_START']
             binsize = binsize.iloc[0]
@@ -219,19 +203,12 @@ if __name__ == '__main__':
             thr_df = get_threshold_classes(pred_filtered, real_filtered, np.round(thresholds, 4))
             pred_all = thr_df.add(pred_all, fill_value=0)
 
-            # thr_df_pk = get_threshold_classes(pk_filtered, real_filtered, np.round(thresholds_pk, 4))
-            # pred_all_pk = thr_df_pk.add(pred_all_pk, fill_value=0)
-
             thr_df_mus = get_threshold_classes_mus(mus_filtered, real_filtered, np.round(thresholds_mus, 4))
             pred_all_mus = thr_df_mus.add(pred_all_mus, fill_value=0)
 
-    #pred_all_pk.to_csv('/mnt/md0/varshini/RCMC_LoopCaller/pred_thresholds_pk_full_chr45_filtered_newGM_s1.txt', sep='\t')
     pred_all_mus.to_csv('/mnt/md0/varshini/RCMC_LoopCaller/pred_thresholds_mus_repro.txt', sep='\t')
     pred_all.to_csv('/mnt/md0/varshini/RCMC_LoopCaller/pred_thresholds_idli_repro.txt', sep='\t')
-    # for x in pred_all.columns:
-    #     print(x)
-    #     pred_all[(pred_all[x].loc['TP']==0) & (pred_all[x].loc['FP']==0)][x].loc['FP'] = 0
-    #pred_all.fillna(1, inplace=True)
+
 
 
 

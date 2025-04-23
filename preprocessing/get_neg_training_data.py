@@ -1,3 +1,9 @@
+'''
+Written by Fan Feng
+Edited/point of contact: Varshini Ramanathan (varsh@mit.edu)
+Purpose: generate training data for CHIRON
+'''
+
 import os
 import numpy as np
 import cooler

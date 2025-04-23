@@ -1,6 +1,6 @@
 import setup
 import utils
-import centering_archival
+import centering
 import pandas as pd
 import os
 import numpy as np
@@ -153,7 +153,7 @@ for clr_path in os.listdir(clr_path_base):
             # center is computed in [col, row] but returned in [row, col]
             print(f"curr loop: {np.shape(curr_loop)}")
             # cctr, shift, dist = centering.centering_fracshift_track_distances(curr_loop, win=5, plotting=plotting, iterations=20)
-            cctr, shift, dist, fshift = centering.centering_fracshift_track_distances_2(curr_loop, win=9,
+            cctr, shift, dist, fshift = centering.centering_fracshift_track_distances_masked(curr_loop, win=9,
                                                                                         plotting=False,
                                                                                         iterations=20,
                                                                                         mask_radius=3)

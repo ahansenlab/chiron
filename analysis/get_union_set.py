@@ -31,12 +31,12 @@ def get_distances_chr(df1, df2):
         print(chrom)
         df1_chr = df1[df1['chr1']==chrom]
         df2_chr = df2[df2['chr1'] == chrom]
-        dist_df12_chr = get_distances(df2, df1)  # c1 is df1 here; dist frm each df1
-        dist_df21_chr = get_distances(df1, df2) # c1 is df2 here; dist frm each df2
+        dist_df12_chr = get_distances(df2_chr, df1_chr)  # c1 is df1 here; dist frm each df1
+        dist_df21_chr = get_distances(df1_chr, df2_chr) # c1 is df2 here; dist frm each df2
         # match both dfs based on having coordinates in the union
 
-        df1.loc[df1[df1['chr1']==chrom].index,'mindist'] = dist_df12_chr['distance']
-        df2.loc[df2[df2['chr1'] == chrom].index,'mindist'] = dist_df21_chr['distance']
+        df1.loc[df1[df1['chr1']==chrom].index,'mindist'] = dist_df12_chr['distance'].values
+        df2.loc[df2[df2['chr1'] == chrom].index,'mindist'] = dist_df21_chr['distance'].values
 
     return df1, df2
 
