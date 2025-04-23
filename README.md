@@ -14,7 +14,7 @@ The complete usage for CHIRON + fracshift is to impute loops on your RCMC, merge
 Example usage of CHIRON -> merge -> fracshift:
 
 #### call loops
-python /chiron/chiron/imputation.py CHIRON_v0 \
+python /chiron/chiron/imputation.py /chiron/CHIRON_v0 \
     GM12878 GM12878_merged_realigned.50.mcool \
     region_list.txt -r region4,region5 -b 64 \
     -o test_output
