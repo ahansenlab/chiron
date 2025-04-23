@@ -75,3 +75,10 @@ Example imputation:
 python /chiron/chiron/imputation.py CHIRON_v0 \
     GM12878 GM12878_merged_realigned.50.mcool \
     regions_all.bed -r region4,region5 -b 64
+
+## How to Cite:
+
+This work is shared under an MIT license. If you make use of analysis scripts or data from this work, please cite as follows:
+
+Hong, C.K.Y., Feng, F., Ramanathan, V., Liu, J., Hansen, A.S. BioRxiv 2025.
+
