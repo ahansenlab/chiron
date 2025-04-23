@@ -29,12 +29,12 @@ python /chiron/fracshift/exec_centering.py region_list.txt chiron_out/input_call
 
 Find below detailed instructions on training and running the model (note that most users can jump right to imputation and loop merging):
 
-1. Data fetching and pre-processing scripts (preprocessing/) \n
+1. Data fetching and pre-processing scripts (preprocessing/) \
 get_pretraining_data.py \
-get_neg_pretraining_data.py \
+get_neg_pretraining_data.py 
 
 get_training_data.py \
-get_neg_training_data.py \ 
+get_neg_training_data.py  
 
 The negative data scripts rely on the corresponding positive data scripts, but the pretraining and fine-tuning data can be generated independently.
 
@@ -43,7 +43,7 @@ The negative data scripts rely on the corresponding positive data scripts, but t
 a. Pre-training: model_pretrain.py \
 b. Fine-tuning: model_finetune.py \
 c. Imputation: imputation_by_region.py \
-d. Loop merging: merge_loops_gaussian.py \
+d. Loop merging: merge_loops_gaussian.py 
 
 Until the fine-tuning step, all the scripts contain hard-coded paths and should be modified for each user.The fine-tuning, imputation, and loop merging can be run by specifying parameters in the command line flags (see -h flag for help).
 
@@ -53,12 +53,12 @@ After calling loops, there is an optional step to localize the loop centers to a
 
 User-facing scripts:
 a. fracshift_exec_demo.py: shell that runs a demo of exec_centering.py  \
-b. exec_centering.py: main script that reads all the loops and applies fracshift.  \
+b. exec_centering.py: main script that reads all the loops and applies fracshift.  
 
 Modules:
 c. centering.py: contains all centering/upresolution functions  \
 d. setup.py  \
-e. utils.py  \
+e. utils.py  
 
 Required inputs:
 - 'region_list': a 2-column file with names for the regions and the UCSC genome coordinates for each
