@@ -134,12 +134,12 @@ def identify_loops(run_name,
                    ch_coord, paths,
                    output, tns=None, threshold=0.99,
                    max_distance=1000000, min_distance=5000,
-                   resolution=200, interval=1000, batch_size=10):
+                   resolution=200, interval=1000, batch_size=10, lr=0.001):
     """
     Identify the pixels that contains a loop
     """
     model = CNN_model(lr=lr)
-    model.load_weights(f'{run_name}_model.h5')
+    model.load_weights(f'{run_name}.h5')
 
     f_out = open(output, 'w')
     f_out.write(
@@ -250,7 +250,7 @@ if __name__ == '__main__':
     if args.regions == 'all':
         ch_coord = ch_coord_all
     else:
-        regions = [int(item) for item in args.regions.split(',')]
+        regions = [item for item in args.regions.split(',')]
         ch_coord = {key: value for key, value in ch_coord_all.items() if key in regions}
 
     print(ch_coord)

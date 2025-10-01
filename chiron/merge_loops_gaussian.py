@@ -1,6 +1,3 @@
-"""
-Author/point of contact: Varshini Ramanathan (varsh@mit.edu)
-"""
 import copy
 
 import cv2
@@ -230,7 +227,7 @@ if __name__ == "__main__":
                         help='Dilation kernel (defines the max number of pixels between features)')
     parser.add_argument('-t', '--intensity_threshold', type=float, default=0.8,
                         help='value threshold (relative to the max) which is counted as a feature')
-    parser.add_argument('-r', '--res', type=int, default=1000)
+    parser.add_argument('-s', '--res', type=int, default=1000)
     parser.add_argument('-m', '--method', type=str, default='intensity',
                         help='options: intensity and probability (segment by image intensity or loop probability)')
     parser.add_argument('-o', '--outfile', type=str, default=None)
@@ -241,7 +238,7 @@ if __name__ == "__main__":
     m = 5 % 2  # Padding for the rectangular region
     intensity_threshold = args.intensity_threshold  # Threshold for local maxima based on global maximum
     method = args.method
-    clr_path = args.cooler_name
+    clr_path = args.cooler_path
     loop_dir = args.loop_dir
     res = args.res
     outdir = args.outdir
@@ -306,7 +303,7 @@ if __name__ == "__main__":
             os.mkdir(outdir)
 
         if args.outfile is None:
-            out_df.to_csv(os.path.join(loop_dir, f'{outdir}/{f.split(".")[1]}_merged_gaussian.txt'), index=False, sep='\t')
+            out_df.to_csv(os.path.join(loop_dir, f'{outdir}/{f.split(".")[0]}_merged_gaussian.txt'), index=False, sep='\t')
         else:
             out_df.to_csv(os.path.join(loop_dir, f'{outdir}/{args.outfile}'), index=False, sep='\t')
 
